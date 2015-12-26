@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gdi", "gdi\gdi.vcxproj", "{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "key_event", "key_event\key_event.vcxproj", "{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mouse", "mouse\mouse.vcxproj", "{57ADDB20-47AC-41E0-B065-26DC8C76FDBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}.Debug|Win32.Build.0 = Debug|Win32
+		{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}.Release|Win32.ActiveCfg = Release|Win32
+		{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}.Release|Win32.Build.0 = Release|Win32
+		{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}.Debug|Win32.Build.0 = Debug|Win32
+		{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}.Release|Win32.ActiveCfg = Release|Win32
+		{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}.Release|Win32.Build.0 = Release|Win32
+		{57ADDB20-47AC-41E0-B065-26DC8C76FDBC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{57ADDB20-47AC-41E0-B065-26DC8C76FDBC}.Debug|Win32.Build.0 = Debug|Win32
+		{57ADDB20-47AC-41E0-B065-26DC8C76FDBC}.Release|Win32.ActiveCfg = Release|Win32
+		{57ADDB20-47AC-41E0-B065-26DC8C76FDBC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
