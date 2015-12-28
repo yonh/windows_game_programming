@@ -11,9 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E4E091E6-45F0-44C2-8344-4622BAD1CC7F}</ProjectGuid>
+    <ProjectGuid>{F0ECD5FB-CD1D-46A8-8EB3-A15B3F939F39}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>gdi</RootNamespace>
+    <RootNamespace>key_event</RootNamespace>
+    <ProjectName>demo_02</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
