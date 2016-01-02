@@ -7,6 +7,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+/*
+用于理解 fps的概念
+*/
+
 
 #define WINDOW_CLASS_NAME "WINCLASS1"
 
@@ -15,6 +19,8 @@ HINSTANCE hinstance_app      = NULL; // globally track hinstance
 #define KEYDOWN(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 #define KEYUP(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 400
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 {
@@ -28,11 +34,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 	switch (msg)
 	{
 	case WM_CREATE:
-		// do initialization stuff here
-		/*MessageBox(NULL, "Window is created!!!",
-                 "Title",
-                  MB_OK | MB_ICONEXCLAMATION);*/
-
 		//hdc = BeginPaint(hwnd, &ps);
 		//你可以在这里实现画图，但是你只能访问实际上需要重绘的部分
 		//EndPaint(hwnd, &ps);
@@ -49,17 +50,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
-		
-		int result;
-		result = MessageBox(hwnd, "Are you sure quit this application?", "Close", MB_YESNO | MB_ICONQUESTION);
-
-		if (result == IDYES)
-		{
-			PostQuitMessage(0);
-			return DefWindowProc(hwnd, msg, wparam, lparam);
-		} else {
-			return 0;
-		}
 		// kill the application, this sends a WM_QUIT message
 	default:
 		break;
@@ -101,7 +91,7 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 								"Basic Window", // title
 								WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 								0,0, // x,y
-								400,400, ///window height,width
+								WINDOW_WIDTH,WINDOW_HEIGHT, ///window height,width
 								NULL, // handle to parent
 								NULL, // handle to menu
 								hinstance,
@@ -126,26 +116,85 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 	POINT last_pos; // used to store last position
 	MoveToEx(hdc, 10, 10, NULL);
 	MoveToEx(hdc, 50, 50, &last_pos);
-	HPEN green_pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
+	HPEN green_pen = CreatePen(PS_SOLID, 1, RGB(0,255,0));
 	HPEN old_pen = (HPEN)SelectObject(hdc, ((HGDIOBJ)green_pen));
 
+	
 
-	ReleaseDC(hwnd, hdc);
+	int x1 = 0, x2 = 0, y1 = 0, y2 = 10;
+	int vx = rand()%5, vy = rand()%10,v2x = 5, v2y = 10;
+
+
+	int i = 0;
+	char buffer[20];
+
+	int start_time = GetTickCount();
 
 	// enter main event loop
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (true)
 	{
-		//translate any accelerator keys
-		TranslateMessage(&msg);
+		int start_time2 = GetTickCount();
 
-		//send the message to the window proc
-		DispatchMessage(&msg);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+			//translate any accelerator keys
+			TranslateMessage(&msg);
+			//send the message to the window proc
+			DispatchMessage(&msg);
+		}
+
+
+		if ( GetTickCount() - start_time > 1000)
+		{
+			continue;
+			//break;
+		}
+		
+
+		// draw a line
+		MoveToEx(hdc, x1,y1, NULL);
+		LineTo(hdc, x2,y2);
+			
+		if ( y2<0 || y2 > WINDOW_HEIGHT-40 )
+		{
+			v2y = -v2y;
+		}
+			
+		if ( x2 < 0 || x2 > WINDOW_WIDTH )
+		{
+			v2x = -v2x;
+		}
+		if ( y1<0 || y1 > WINDOW_HEIGHT-40 )
+		{
+			vy = -vy;
+		}
+			
+		if ( x1 < 0 || x1 > WINDOW_WIDTH )
+		{
+			vx = -vx;
+		}
+
+		x1 +=vx;
+		y1 += vy;
+		x2 += v2x;
+		y2 +=v2y;
+		i++;
+		sprintf(buffer, "%d, %d\n", i, GetTickCount() - start_time);
+		//OutputDebugString(buffer);
+
+		TextOut(hdc, i%2*70, i/2*15, buffer, strlen(buffer));
+
+		while((GetTickCount() - start_time2) < 30) {
+			/*sprintf(buffer, "%d, %d\n", i, GetTickCount() - start_time);
+			OutputDebugString(buffer);*/
+		}
+		
 	}
-
-
-
-
-
+	ReleaseDC(hwnd, hdc);
 
 	// return to Windows like this
 	return msg.wParam;

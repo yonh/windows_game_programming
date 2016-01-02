@@ -15,6 +15,9 @@ HINSTANCE hinstance_app      = NULL; // globally track hinstance
 #define KEYDOWN(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 #define KEYUP(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 
+// timer
+#define TIMER_ID_1SEC 1
+#define TIMER_ID_2SEC 2
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 {
@@ -48,18 +51,21 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 		return 0;
 		break;
 	case WM_DESTROY:
+		KillTimer(hwnd, TIMER_ID_1SEC);
+		KillTimer(hwnd, TIMER_ID_2SEC);
 		PostQuitMessage(0);
-		
-		int result;
-		result = MessageBox(hwnd, "Are you sure quit this application?", "Close", MB_YESNO | MB_ICONQUESTION);
-
-		if (result == IDYES)
+	case WM_TIMER:
+		switch (wparam)
 		{
-			PostQuitMessage(0);
-			return DefWindowProc(hwnd, msg, wparam, lparam);
-		} else {
-			return 0;
+		case TIMER_ID_1SEC:
+			OutputDebugString("timer 1\n");
+			break;
+		case TIMER_ID_2SEC:
+			OutputDebugString("timer 2\n");
+			break;
 		}
+		return 0;
+		break;
 		// kill the application, this sends a WM_QUIT message
 	default:
 		break;
@@ -128,7 +134,10 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 	MoveToEx(hdc, 50, 50, &last_pos);
 	HPEN green_pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
 	HPEN old_pen = (HPEN)SelectObject(hdc, ((HGDIOBJ)green_pen));
-
+	
+	//call timer
+	SetTimer(hwnd, TIMER_ID_1SEC, 1000, NULL);
+	SetTimer(hwnd, TIMER_ID_2SEC, 2000, NULL);
 
 	ReleaseDC(hwnd, hdc);
 

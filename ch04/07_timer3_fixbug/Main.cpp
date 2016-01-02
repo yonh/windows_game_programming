@@ -7,6 +7,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+/*
+修复上一程序绘制线条一卡一卡的问题
+*/
+
 
 #define WINDOW_CLASS_NAME "WINCLASS1"
 
@@ -15,6 +19,8 @@ HINSTANCE hinstance_app      = NULL; // globally track hinstance
 #define KEYDOWN(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 #define KEYUP(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 400
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
 {
@@ -126,26 +132,65 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 	POINT last_pos; // used to store last position
 	MoveToEx(hdc, 10, 10, NULL);
 	MoveToEx(hdc, 50, 50, &last_pos);
-	HPEN green_pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
+	HPEN green_pen = CreatePen(PS_SOLID, 1, RGB(0,255,0));
 	HPEN old_pen = (HPEN)SelectObject(hdc, ((HGDIOBJ)green_pen));
 
+	
 
-	ReleaseDC(hwnd, hdc);
+	int x1 = 0, x2 = 0, y1 = 0, y2 = 10;
+	int vx = rand()%5, vy = rand()%10,v2x = 5, v2y = 10;
+
+	
 
 	// enter main event loop
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (true)
 	{
-		//translate any accelerator keys
-		TranslateMessage(&msg);
+		int start_time = GetTickCount();
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+			//translate any accelerator keys
+			TranslateMessage(&msg);
 
-		//send the message to the window proc
-		DispatchMessage(&msg);
+			//send the message to the window proc
+			DispatchMessage(&msg);
+		}
+
+		// draw a line
+		MoveToEx(hdc, x1,y1, NULL);
+		LineTo(hdc, x2,y2);
+			
+		if ( y2<0 || y2 > WINDOW_HEIGHT-40 )
+		{
+			v2y = -v2y;
+		}
+			
+		if ( x2 < 0 || x2 > WINDOW_WIDTH )
+		{
+			v2x = -v2x;
+		}
+		if ( y1<0 || y1 > WINDOW_HEIGHT-40 )
+		{
+			vy = -vy;
+		}
+			
+		if ( x1 < 0 || x1 > WINDOW_WIDTH )
+		{
+			vx = -vx;
+		}
+
+		x1 +=vx;
+		y1 += vy;
+		x2 += v2x;
+		y2 +=v2y;
+		
+	
+			while((GetTickCount() - start_time) < 33);
 	}
-
-
-
-
-
+	ReleaseDC(hwnd, hdc);
 
 	// return to Windows like this
 	return msg.wParam;

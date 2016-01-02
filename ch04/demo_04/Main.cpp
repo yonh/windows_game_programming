@@ -12,8 +12,8 @@
 
 HINSTANCE hinstance_app      = NULL; // globally track hinstance
 
-#define KEYDOWN(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
-#define KEYUP(vk_code) GetAsyncKeyState(vk_code) & 0x8000 ? 1:0
+#define WINDOW_WIDTH  400
+#define WINDOW_HEIGHT 300
 
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam,	LPARAM lparam)
@@ -101,7 +101,7 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 								"Basic Window", // title
 								WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 								0,0, // x,y
-								400,400, ///window height,width
+								WINDOW_WIDTH,WINDOW_HEIGHT, ///window height,width
 								NULL, // handle to parent
 								NULL, // handle to menu
 								hinstance,
@@ -124,28 +124,41 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPSTR lpcmdline
 
 	// draw a line
 	POINT last_pos; // used to store last position
-	MoveToEx(hdc, 10, 10, NULL);
-	MoveToEx(hdc, 50, 50, &last_pos);
-	HPEN green_pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
-	HPEN old_pen = (HPEN)SelectObject(hdc, ((HGDIOBJ)green_pen));
+	HPEN pen, old_pen;
 
-
-	ReleaseDC(hwnd, hdc);
 
 	// enter main event loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
+		HPEN   pen_color   = CreatePen(PS_SOLID, 1, RGB(rand()%256,rand()%256,rand()%256));
+		HBRUSH brush_color = CreateSolidBrush(RGB(rand()%256,rand()%256,rand()%256));
+		// select them into dc
+		SelectObject(hdc,pen_color);
+		SelectObject(hdc,brush_color);
+
+
+		int point_count = 3 + rand()%8;
+		POINT point_list[10];
+		for(int i=0; i<point_count; i++)
+		{
+			point_list[i].x = rand()%WINDOW_WIDTH;
+			point_list[i].y = rand()%WINDOW_HEIGHT;
+		}
+		Polygon(hdc, point_list, point_count);
+
+		Sleep(800);
+	
+		ReleaseDC(hwnd, hdc);
+
+
+
+	
 		//translate any accelerator keys
 		TranslateMessage(&msg);
 
 		//send the message to the window proc
 		DispatchMessage(&msg);
 	}
-
-
-
-
-
 
 	// return to Windows like this
 	return msg.wParam;
