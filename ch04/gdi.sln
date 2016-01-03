@@ -19,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_timer3_fixbug", "07_time
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08_timer4", "08_timer4\08_timer4.vcxproj", "{C1108C0E-93F4-4E38-8F97-60D63F85968D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09_controls", "09_controls\09_controls.vcxproj", "{80A34CE8-3069-480E-8931-175731AB11BD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10_t3dconsole", "10_t3dconsole\10_t3dconsole.vcxproj", "{DD3BDCD0-E03F-447A-B842-7A96DABA0CC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +65,14 @@ Global
 		{C1108C0E-93F4-4E38-8F97-60D63F85968D}.Debug|Win32.Build.0 = Debug|Win32
 		{C1108C0E-93F4-4E38-8F97-60D63F85968D}.Release|Win32.ActiveCfg = Release|Win32
 		{C1108C0E-93F4-4E38-8F97-60D63F85968D}.Release|Win32.Build.0 = Release|Win32
+		{80A34CE8-3069-480E-8931-175731AB11BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{80A34CE8-3069-480E-8931-175731AB11BD}.Debug|Win32.Build.0 = Debug|Win32
+		{80A34CE8-3069-480E-8931-175731AB11BD}.Release|Win32.ActiveCfg = Release|Win32
+		{80A34CE8-3069-480E-8931-175731AB11BD}.Release|Win32.Build.0 = Release|Win32
+		{DD3BDCD0-E03F-447A-B842-7A96DABA0CC5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DD3BDCD0-E03F-447A-B842-7A96DABA0CC5}.Debug|Win32.Build.0 = Debug|Win32
+		{DD3BDCD0-E03F-447A-B842-7A96DABA0CC5}.Release|Win32.ActiveCfg = Release|Win32
+		{DD3BDCD0-E03F-447A-B842-7A96DABA0CC5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
