@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directdraw_demo", "directdraw_demo\directdraw_demo.vcxproj", "{55AF8AD6-2A08-4098-823C-614C8C93D47C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directdraw_demo_2", "directdraw_demo_2\directdraw_demo_2.vcxproj", "{0598CEB0-3EFC-4D24-90BD-BC5B7C5F08D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{55AF8AD6-2A08-4098-823C-614C8C93D47C}.Debug|Win32.Build.0 = Debug|Win32
 		{55AF8AD6-2A08-4098-823C-614C8C93D47C}.Release|Win32.ActiveCfg = Release|Win32
 		{55AF8AD6-2A08-4098-823C-614C8C93D47C}.Release|Win32.Build.0 = Release|Win32
+		{0598CEB0-3EFC-4D24-90BD-BC5B7C5F08D7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0598CEB0-3EFC-4D24-90BD-BC5B7C5F08D7}.Debug|Win32.Build.0 = Debug|Win32
+		{0598CEB0-3EFC-4D24-90BD-BC5B7C5F08D7}.Release|Win32.ActiveCfg = Release|Win32
+		{0598CEB0-3EFC-4D24-90BD-BC5B7C5F08D7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
